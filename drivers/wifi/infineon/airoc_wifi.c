@@ -444,6 +444,8 @@ static void airoc_mgmt_init(struct net_if *iface)
 	struct airoc_wifi_data *data = dev->data;
 	struct ethernet_context *eth_ctx = net_if_l2_data(iface);
 
+	LOG_ERR("Initialising wifi airoc module by Tim");
+
 	eth_ctx->eth_if_type = L2_ETH_IF_TYPE_WIFI;
 	data->iface = iface;
 	airoc_wifi_iface = iface;
