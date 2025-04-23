@@ -13,6 +13,7 @@
 #include <zephyr/net/conn_mgr/connectivity_wifi_mgmt.h>
 #include <airoc_wifi.h>
 #include <airoc_whd_hal_common.h>
+#include <whd_wifi_api.h>
 
 LOG_MODULE_REGISTER(infineon_airoc_wifi, CONFIG_WIFI_LOG_LEVEL);
 
@@ -445,6 +446,10 @@ static void airoc_mgmt_init(struct net_if *iface)
 	struct ethernet_context *eth_ctx = net_if_l2_data(iface);
 
 	LOG_ERR("Initialising wifi airoc module by Tim");
+
+	whd_interface_t whd_interface = airoc_wifi_get_whd_interface();
+
+	// uint32_t r = whd_wifi_set_ioctl_value(whd_interface, 263, 1);
 
 	eth_ctx->eth_if_type = L2_ETH_IF_TYPE_WIFI;
 	data->iface = iface;
