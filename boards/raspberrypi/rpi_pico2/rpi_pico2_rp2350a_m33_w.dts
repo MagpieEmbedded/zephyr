@@ -34,6 +34,7 @@
 		group1 {
 			pinmux = <PIO0_P24>;
 			input-enable;
+			bias-disable;
 		};
 	};
 
@@ -43,6 +44,7 @@
 			/* Lacking a specific SIO pin definition, use the RP2040_PINMUX macro */
 			pinmux = <RP2XXX_PINMUX(24, RP2_PINCTRL_GPIO_FUNC_SIO)>;
 			input-enable;
+			bias-pull-up;
 		};
 	};
 };
