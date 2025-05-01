@@ -10,6 +10,7 @@ if(CONFIG_HAS_RPI_PICO)
   set(rp2xxx_dir ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/${CONFIG_SOC_SERIES})
   set(common_dir ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/common)
   set(boot_stage_dir ${rp2xxx_dir}/boot_stage2)
+  unset(CYW43_LWIP)
 
   # The Second Stage Bootloader is only linked to the app that resides
   # at 0x100. Therefore, only if the app's offset is 0x100, the second
@@ -38,6 +39,7 @@ if(CONFIG_HAS_RPI_PICO)
         -DFLASH_TYPE=${flash_type}
         -DPYTHON_EXECUTABLE=${Python3_EXECUTABLE}
         -DRP2_BOOTLOADER_BYPRODUCT=${rp2_bootloader_asm}
+        -DCYW43_LWIP=0
       INSTALL_COMMAND "" # No installation needed
       BUILD_BYPRODUCTS ${rp2_bootloader_asm}
       BUILD_ALWAYS TRUE
@@ -65,6 +67,9 @@ if(CONFIG_HAS_RPI_PICO)
     ${rp2_common_dir}/hardware_ticks/ticks.c
     ${rp2_common_dir}/pico_bootrom/bootrom.c
     ${rp2xxx_dir}/pico_platform/platform.c
+
+    ${rp2_common_dir}/pico_cyw43_arch/cyw43_arch_poll.c
+
   )
 
   zephyr_include_directories(
@@ -92,6 +97,14 @@ if(CONFIG_HAS_RPI_PICO)
     ${rp2xxx_dir}/hardware_regs/include
     ${rp2xxx_dir}/hardware_structs/include
     ${rp2xxx_dir}/pico_platform/include
+
+    ${common_dir}/pico_time/include
+    ${rp2_common_dir}/pico_async_context/include
+    ${rp2_common_dir}/pico_cyw43_arch/include
+    ${rp2_common_dir}/pico_cyw43_driver/include
+    ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/lib/btstack/3rd-party/lwip/core/src/include
+    ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/lib/cyw43-driver/src
+
     ${CMAKE_CURRENT_LIST_DIR}
   )
 
