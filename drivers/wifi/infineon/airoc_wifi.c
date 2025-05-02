@@ -9,11 +9,13 @@
  * @brief AIROC Wi-Fi driver.
  */
 
+#include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/net/conn_mgr/connectivity_wifi_mgmt.h>
 #include <airoc_wifi.h>
 #include <airoc_whd_hal_common.h>
 #include <whd_wifi_api.h>
+#include <whd_cdc_bdc.h>
 
 LOG_MODULE_REGISTER(infineon_airoc_wifi, CONFIG_WIFI_LOG_LEVEL);
 
@@ -448,6 +450,31 @@ static void airoc_mgmt_init(struct net_if *iface)
 	LOG_ERR("Initialising wifi airoc module by Tim");
 
 	whd_interface_t whd_interface = airoc_wifi_get_whd_interface();
+	whd_buffer_t buffer;
+
+	while (1)
+	{
+		uint8_t * gpio_on_data = (uint8_t *)whd_cdc_get_iovar_buffer(whd_interface->whd_driver, &buffer, 8, "gpioout");
+		LOG_ERR("LED On");
+		gpio_on_data[0] = 1;
+		gpio_on_data[4] = 1;
+
+		whd_cdc_send_iovar(whd_interface, CDC_SET, (whd_buffer_t *)buffer, NULL);
+
+		k_msleep(1000);
+
+		uint8_t * gpio_off_data = (uint8_t *)whd_cdc_get_iovar_buffer(whd_interface->whd_driver, &buffer, 8, "gpioout");
+		LOG_ERR("LED Off");
+		gpio_off_data[0] = 1;
+		gpio_off_data[4] = 0;
+
+		whd_cdc_send_iovar(whd_interface, CDC_SET, (whd_buffer_t *)buffer, NULL);
+
+		k_msleep(1000);
+	}
+
+	// uint8_t return_buffer[256] = { 0 };
+	// whd_result_t r = whd_wifi_get_iovar_buffer_with_param(whd_interface, "gpioout", gpio_set_led_buffer, 8, return_buffer, 256);
 
 	// uint32_t r = whd_wifi_set_ioctl_value(whd_interface, 263, 1);
 
