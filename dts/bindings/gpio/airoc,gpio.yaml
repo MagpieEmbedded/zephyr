@@ -1,0 +1,16 @@
+# Copyright 2020, Friedt Professional Engineering Services, Inc
+# SPDX-License-Identifier: Apache-2.0
+
+description: GPIO Emulator
+
+compatible: "airoc,gpio"
+
+include: [gpio-controller.yaml, base.yaml]
+
+properties:
+  "#gpio-cells":
+    const: 2
+
+gpio-cells:
+  - pin
+  - flags

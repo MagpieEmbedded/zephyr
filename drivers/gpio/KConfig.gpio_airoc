@@ -1,0 +1,7 @@
+config GPIO_AIROC
+	bool "AIROC GPIO ENABLED"
+	default y
+	depends on DT_HAS_GPIO_AIROC_ENABLED
+	depends on SPI
+	help
+	  Use Airoc wifi driver for GPIO

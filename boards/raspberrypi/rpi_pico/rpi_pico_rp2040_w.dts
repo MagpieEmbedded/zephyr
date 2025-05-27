@@ -35,6 +35,29 @@
 	};
 };
 
+/ {
+		aliases {
+		led1 = &led1;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		/* Lightwell RGB */
+		led1: led_1 {
+			gpios = <&airoc_gpio 0 GPIO_ACTIVE_HIGH>;
+			label = "Red LED";
+			//vin-supply = <&vdd_pwr>;
+		};
+	};
+
+	airoc_gpio: airoc_gpio {
+		compatible = "airoc,gpio";
+		status = "okay";
+		gpio-controller;
+		#gpio-cells = <2>;
+	};
+};
+
 &pio0 {
 	status = "okay";
 
