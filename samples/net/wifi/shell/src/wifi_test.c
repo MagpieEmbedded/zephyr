@@ -26,5 +26,7 @@ int main(void)
 
 	printk("Configured airoc led");
 
+	k_msleep(100);
+
 	return 0;
 }

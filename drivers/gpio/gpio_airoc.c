@@ -4,9 +4,12 @@
 
 #define DT_DRV_COMPAT infineon_airoc_gpio
 
+#include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/gpio/gpio_utils.h>
 #include <zephyr/kernel.h>
+
+LOG_MODULE_REGISTER(infineon_airoc_gpio, CONFIG_GPIO_LOG_LEVEL);
 
 struct vnd_gpio_config {
 	/* gpio_driver_config needs to be first */
@@ -22,6 +25,7 @@ static int vnd_gpio_pin_configure(const struct device *port,
 				  gpio_pin_t pin,
 				  gpio_flags_t flags)
 {
+	LOG_ERR("Configuring Infineor GPIO pin");
     printk("Configuring gpio driver\n");
 
 	return 0;
@@ -55,7 +59,8 @@ static int vnd_gpio_port_clear_bits_raw(const struct device *port,
 static int vnd_gpio_port_toggle_bits(const struct device *port,
 				     gpio_port_pins_t pins)
 {
-	return -ENOTSUP;
+	printk("Toggling GPIO driver\n");
+	return 0;
 }
 
 static DEVICE_API(gpio, infineon_airoc_gpio_api) = {
