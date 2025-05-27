@@ -26,6 +26,15 @@ int main(void)
 
 	printk("Configured airoc led");
 
+	while (1) {
+		ret = gpio_pin_toggle_dt(&led);
+		if (ret < 0) {
+			return 0;
+		}
+
+		k_msleep(1000);
+	}
+
 	k_msleep(100);
 
 	return 0;

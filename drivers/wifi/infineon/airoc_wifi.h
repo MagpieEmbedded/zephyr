@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2023 Cypress Semiconductor Corporation (an Infineon company) or
- * an affiliate of Cypress Semiconductor Corporation
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
-#include <whd_buffer_api.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/net/wifi_mgmt.h>
 
@@ -83,11 +75,3 @@ struct airoc_wifi_config {
 #endif
 #endif
 };
-
-/**
- * \brief This function returns pointer type to handle instance
- *        of whd interface (whd_interface_t) which allocated in
- *        Zephyr AIROC driver (drivers/wifi/infineon/airoc_wifi.c)
- */
-
-whd_interface_t airoc_wifi_get_whd_interface(void);

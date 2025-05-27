@@ -4,7 +4,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
+ 
+#include <zephyr/drivers/wifi/infineon/airoc_wifi_if.h>
 #include "airoc_wifi.h"
 #include "airoc_whd_hal_common.h"
 
