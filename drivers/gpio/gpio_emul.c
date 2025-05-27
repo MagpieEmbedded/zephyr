@@ -613,6 +613,8 @@ static int gpio_emul_port_toggle_bits(const struct device *port, gpio_port_pins_
 	k_spinlock_key_t key;
 	int rv;
 
+	printk("Tim toggle!\n");
+
 	key = k_spin_lock(&drv_data->lock);
 	drv_data->output_vals ^= (pins & get_output_pins(port));
 	/* in push-pull, set input values but do not fire interrupts (yet) */

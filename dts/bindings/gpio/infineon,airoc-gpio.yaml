@@ -3,7 +3,7 @@
 
 description: GPIO Emulator
 
-compatible: "airoc,gpio"
+compatible: "infineon,airoc-gpio"
 
 include: [gpio-controller.yaml, base.yaml]
 

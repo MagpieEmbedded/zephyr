@@ -36,10 +36,6 @@
 };
 
 / {
-		aliases {
-		led1 = &led1;
-	};
-
 	leds {
 		compatible = "gpio-leds";
 		/* Lightwell RGB */
@@ -51,10 +47,14 @@
 	};
 
 	airoc_gpio: airoc_gpio {
-		compatible = "airoc,gpio";
+		compatible = "infineon,airoc-gpio";
 		status = "okay";
 		gpio-controller;
 		#gpio-cells = <2>;
+	};
+
+	aliases {
+		led1 = &led1;
 	};
 };
 

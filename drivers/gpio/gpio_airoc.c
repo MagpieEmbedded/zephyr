@@ -2,7 +2,7 @@
 
  */
 
-#define DT_DRV_COMPAT airoc_gpio
+#define DT_DRV_COMPAT infineon_airoc_gpio
 
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/gpio/gpio_utils.h>

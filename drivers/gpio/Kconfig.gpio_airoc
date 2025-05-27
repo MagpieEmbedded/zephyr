@@ -1,7 +1,6 @@
-config GPIO_AIROC
+config GPIO_INFINEON_AIROC
 	bool "AIROC GPIO ENABLED"
 	default y
-	depends on DT_HAS_GPIO_AIROC_ENABLED
-	depends on SPI
+	depends on DT_HAS_INFINEON_AIROC_GPIO_ENABLED
 	help
-	  Use Airoc wifi driver for GPIO
+	  Use Infineon Airoc wifi driver for GPIO
