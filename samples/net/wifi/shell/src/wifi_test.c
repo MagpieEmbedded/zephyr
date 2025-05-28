@@ -11,31 +11,6 @@
 
 int main(void)
 {
-	int ret;
-
-	static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led1), gpios);
-
-	if (!gpio_is_ready_dt(&led)) {
-		return 0;
-	}
-
-	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
-	if (ret < 0) {
-		return 0;
-	}
-
-	printk("Configured airoc led");
-
-	while (1) {
-		ret = gpio_pin_toggle_dt(&led);
-		if (ret < 0) {
-			return 0;
-		}
-
-		k_msleep(1000);
-	}
-
-	k_msleep(100);
 
 	return 0;
 }
